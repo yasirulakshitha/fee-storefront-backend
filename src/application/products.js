@@ -6,11 +6,11 @@ import { NotFoundError } from "../domain/errors/not-found-error.js";
 export const getProducts = async (req, res) => {
   if (req.query.categoryId) {
     const categoryId = req.query.categoryId;
-    const filteredProducts = await Product.find({ categoryId: categoryId });
+    const filteredProducts = await Product.find({ categoryId: categoryId }).populate("categoryId");
     return res.status(200).json(filteredProducts);
   }
 
-  const products = await Product.find();
+  const products = await Product.find().populate("categoryId");
   return res.status(200).json(products);
 };
 
@@ -30,7 +30,7 @@ export const createProduct = async (req, res, next) => {
       price: product.data.price,
       description: product.data.description,
     });
-    return res.status(201);
+    return res.status(201).json({ message: "Product created successfully" });
   } catch (error) {
     next(error);
   }

@@ -62,3 +62,8 @@ export const getOrdersByUser = async (req, res) => {
 
   return res.status(200).json(order);
 };
+
+export const getAllOrders = async (req, res) => {
+  const orders = await Order.find().populate("orderProducts.productId");
+  return res.status(200).json(orders);
+};
