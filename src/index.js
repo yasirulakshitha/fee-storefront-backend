@@ -12,7 +12,7 @@ import cors from "cors";
 const app = express();
 
 app.use(express.json());
-app.use(cors({origin: "https://fee-storefront-backend-hylf.onrender.com"}));
+app.use(cors({origin: "https://extraordinary-pony-fe1178.netlify.app"}));
 
 app.use("/api/products", productsRouter);
 app.use("/api/categories", categoriesRouter);
